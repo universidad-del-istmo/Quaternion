@@ -19,6 +19,8 @@
 
 #include "mainwindow.h"
 
+#include <iostream>
+
 #include "roomlistdock.h"
 #include "userlistdock.h"
 #include "chatroomwidget.h"
@@ -73,6 +75,14 @@ using Quotient::NetworkAccessManager;
 using Quotient::Settings;
 using Quotient::AccountSettings;
 using Quotient::Uri;
+
+void MainWindow::resizeEvent(QResizeEvent *newSize)
+{
+    int foo = 42;
+    foo = 88;
+    foo = foo + foo;
+    std::cout << "El valor de foo es: " << foo << "\n";
+}
 
 MainWindow::MainWindow()
 {
