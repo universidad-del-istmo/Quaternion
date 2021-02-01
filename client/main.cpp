@@ -33,6 +33,13 @@
 #include "linuxutils.h"
 #include <settings.h>
 
+enum OpcionDeInicio {
+
+    Visible = 0,
+    NoVisible = 1,
+    Ninguno = 2
+};
+
 void loadTranslations(
         std::initializer_list<std::pair<QStringList, QString>> translationConfigs)
 {
@@ -186,25 +193,40 @@ int main( int argc, char* argv[] )
     }
     
     char seleccion = '\0';
+    OpcionDeInicio opcion = OpcionDeInicio::Ninguno;
+    //OpcionDeInicio opcion = 2;
 
-    while(
-        seleccion != 'n'
-        && seleccion != 'N'
-        && seleccion != 'h'
-        && seleccion != 'v'
-        && seleccion != 'V'
-    ) {
+    while(opcion == OpcionDeInicio::Ninguno) {
     
         std::cout << "Desea que la aplicacion empieze [v]isible o [n]o visible?\n";
         std::cin >> seleccion;
+
+        switch(seleccion) {
+
+            case 'h':
+            case 'N':
+            case 'n':
+            case 'H':
+                opcion = OpcionDeInicio::NoVisible;
+                break;
+            case 'V':
+            case 'v':
+            case 'm':
+            case 'M':
+                opcion = OpcionDeInicio::Visible;
+                break;
+            default:
+                std::cout << "La opcion '" << seleccion << "' no es valida.\n";
+                break;
+        }
     }
 
     ActivityDetector ad(app, window); Q_UNUSED(ad);
-    if (seleccion == 'n' || seleccion == 'h' || seleccion == 'N') { //if (parser.isSet(hideMainWindow)) {
+    if (opcion == OpcionDeInicio::NoVisible) { //if (parser.isSet(hideMainWindow)) {
         qDebug() << "--- Hide time!";
         window.hide();
     }
-    else if (seleccion == 'v' || seleccion == 'V') {
+    else if (opcion == OpcionDeInicio::Visible) {
         qDebug() << "--- Show time!";
         window.show();
     }
