@@ -85,7 +85,13 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
 
     std::cout << "boton presionado: " << key << "\n";
 
-
+    /*
+    Modificar de tal form que:
+    - ctl + 1 -> 100x100
+    - ctl + 2 -> 200x200
+    ...
+    - ctl + 9 -> 900x900
+    */
     switch(mod) {
 
         case Qt::ControlModifier:
