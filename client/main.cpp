@@ -18,6 +18,7 @@
  **************************************************************************/
 
 #include <QtWidgets/QApplication>
+#include <iostream>
 #include <QtCore/QTranslator>
 #include <QtCore/QLibraryInfo>
 #include <QtCore/QCommandLineParser>
