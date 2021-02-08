@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.  *
  *                                                                        *
  **************************************************************************/
-#include <iostream>
+
 #include <QtWidgets/QApplication>
 #include <QtCore/QTranslator>
 #include <QtCore/QLibraryInfo>
@@ -62,8 +62,6 @@ void loadTranslations(
 
 int main( int argc, char* argv[] )
 {
-    std::cout << "Hola mundo \n Esta es una prueba para poner texto al inicio de Quaternion \n \t Andres Ramos y Gustavo Morales \n";
-
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 #endif
