@@ -19,6 +19,8 @@
 
 #include "chatroomwidget.h"
 
+#include <iostream>
+
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QToolButton>
@@ -648,6 +650,24 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
 
 void ChatRoomWidget::sendInput()
 {
+    
+    std::string miTexto = m_chatEdit->toPlainText().toStdString();
+
+    size_t len = miTexto.size();
+
+    if(len >= 3) {
+        char c1 = miTexto[0];
+        char c2 = miTexto[1];
+        char c3 = miTexto[2];
+
+        /*
+        tarea: imprimir cada caracter y su posicion en el string
+        */
+        std::cout << "caracter 1: " << c1 << "\n";
+        std::cout << "caracter 2: " << c2 << "\n";
+        std::cout << "caracter 3: " << c3 << "\n";
+    }
+    
     if (!attachedFileName.isEmpty())
         sendFile();
     else {
