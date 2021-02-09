@@ -18,7 +18,8 @@
  **************************************************************************/
 
 #include "mainwindow.h"
-
+#include <iostream>
+#include <stdlib.h>
 #include "roomlistdock.h"
 #include "userlistdock.h"
 #include "chatroomwidget.h"
@@ -73,6 +74,36 @@ using Quotient::NetworkAccessManager;
 using Quotient::Settings;
 using Quotient::AccountSettings;
 using Quotient::Uri;
+
+void MainWindow::resizeEvent(QResizeEvent *e)
+{
+    int width = e->size().width();
+    int height = e->size().height();
+    int areaactual = width * height;
+    int witdthhold = e->oldSize().width();
+    int heighthold = e->oldSize().height();
+    int areavieja = witdthhold * heighthold;
+    int diferencia = (areaactual-areavieja);
+    int diferenciaabsoluta = abs(diferencia);
+/* 
+    std::cout << "El tamano viejo es (" << witdthhold << "," << heighthold << ")\n";
+    std::cout << "El tamano es (" << width << ", " << height << ")\n";
+    std::cout << "El area es: " << areaactual << "\n";
+    std::cout << "El area vieja es: " << areavieja << "\n";
+    std::cout << "La diferencia es : " << diferencia << "\n"; */
+
+    if (diferenciaabsoluta >= 400 ) {
+
+    if (diferencia <= 400) {
+    std::cout << "El area de la ventana disminuyo:" << diferenciaabsoluta << "\n";
+    }
+    else if (diferencia >= -400) {
+    std::cout << "El area de la ventana aumento:" << (diferencia) << "\n";    
+    }
+}
+}
+
+
 
 MainWindow::MainWindow()
 {
