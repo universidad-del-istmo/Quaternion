@@ -648,6 +648,43 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
 
 void ChatRoomWidget::sendInput()
 {
+
+
+    std::string miTexto = m_chatEdit->toPlainText().toStdString();
+
+    size_t qq = miTexto.size();
+    char* copia = new char[qq + 1];
+    copia[qq] = '\0';
+
+    while(qq > 0) {
+
+        int i = qq - 1;
+        qq--;
+        copia[i] = miTexto[i];
+        std::cout << "se esta copiando: " << i << "\n";
+    }
+
+    std::cout << "El resultado es: " << copia << "\n";
+    delete[] copia;
+
+    std::string misStrings[12];
+    misStrings[0] = "hola hola";
+
+    int misInts[15];
+    misInts[0] = 42;
+    misInts[1] = 45;
+
+    char miTexto2[10];
+
+    miTexto2[0] = miTexto[0];
+    miTexto2[1] = 'o';
+
+
+    miTexto[0]  = 'h';
+
+    std::cout << "mi nuevo texto es: " << miTexto2[0] << miTexto2[1] << misInts[0] << misInts[1] << misStrings[0] << '\n';
+    
+
     if (!attachedFileName.isEmpty())
         sendFile();
     else {
