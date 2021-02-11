@@ -20,7 +20,7 @@
 #pragma once
 
 #include "accountregistry.h"
-
+#include <QResizeEvent>
 #include <uriresolver.h>
 
 #include <QtWidgets/QMainWindow>
@@ -80,6 +80,10 @@ class MainWindow: public QMainWindow, public Quotient::UriResolverBase {
         void openRoomSettings(QuaternionRoom* r = nullptr);
         void selectRoom(Quotient::Room* r);
         void logout(Connection* c);
+
+
+    protected:
+        void resizeEvent(QResizeEvent *e) override;
 
     private slots:
         void invokeLogin();
