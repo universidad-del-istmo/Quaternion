@@ -662,7 +662,7 @@ void ChatRoomWidget::sendInput()
 
 
     int vocales = 0;
-	    for (int i= 0; miTexto[i] != '\0'; ++i){
+	    for (int i= 0; i<qq; ++i){
 
 		// Obtener el char de la posición en donde está el índice
 		// y por otro lado convertirla a minúscula
@@ -690,9 +690,10 @@ void ChatRoomWidget::sendInput()
     if (copia == miTexto) {
     std::cout << "La palabra es palindrome" << "\n";
     }
+    delete[] copia;
 
     int palabras = 0;
-        for (int i=1;  miTexto[i] != '\0' ; i++) {
+        for (int i=1;  i<qq ; i++) {
         
         if (miTexto[i-1] == ' ' && isalpha(miTexto[i])) {
             palabras++;}    
@@ -700,6 +701,32 @@ void ChatRoomWidget::sendInput()
         if (isalpha(miTexto[0])) {palabras++;}
 
     std::cout << "La cantidad de palabras es: " << palabras << "\n";
+
+    int holas = 0;
+	    for (int i= 0; i<qq; ++i){
+
+		// Obtener el char de la posición en donde está el índice
+		// y por otro lado convertirla a minúscula
+
+		// Así no importa si ponen 'A' o 'a', ambas letras serán convertidas a 'a'
+		char a = tolower(miTexto[i]);
+        char l = tolower(miTexto[i-1]);
+        char o = tolower(miTexto[i-2]);
+        char h = tolower(miTexto[i-3]);
+
+		if (
+		    a == 'a' && 
+			l == 'l' && 
+			o == 'o' && 
+			h == 'h' 
+			
+			)
+		{
+			holas++;
+		}
+        }
+
+    std::cout << "El numero de holas es: " << holas <<"\n";
 
         int numeros = 0;
         for (int i=0;  miTexto[i] != '\0' ; i++) {
@@ -709,7 +736,7 @@ void ChatRoomWidget::sendInput()
         }
 
     std::cout << "La cantidad de numeros es: " << numeros << "\n";
-    delete[] copia;
+    
 
     if (!attachedFileName.isEmpty())
         sendFile();
