@@ -18,7 +18,7 @@
  **************************************************************************/
 
 #include "chatroomwidget.h"
-
+#include <iostream>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QToolButton>
@@ -653,37 +653,63 @@ void ChatRoomWidget::sendInput()
     std::string miTexto = m_chatEdit->toPlainText().toStdString();
 
     size_t qq = miTexto.size();
-    char* copia = new char[qq + 1];
+    char* copia = new char[qq];
     copia[qq] = '\0';
 
-    while(qq > 0) {
-
-        int i = qq - 1;
-        qq--;
+    for (int i = 0; i < qq; i++) {
         copia[i] = miTexto[i];
-        std::cout << "se esta copiando: " << i << "\n";
     }
 
-    std::cout << "El resultado es: " << copia << "\n";
+
+    int vocales = 0;
+	    for (int i= 0; miTexto[i] != '\0'; ++i){
+
+		// Obtener el char de la posición en donde está el índice
+		// y por otro lado convertirla a minúscula
+
+		// Así no importa si ponen 'A' o 'a', ambas letras serán convertidas a 'a'
+		char letraActual = tolower(miTexto[i]);
+
+
+		if (
+			letraActual == 'a' || 
+			letraActual == 'e' || 
+			letraActual == 'i' || 
+			letraActual == 'o' || 
+			letraActual == 'u'
+			)
+		{
+			vocales++;
+		}
+        }
+
+    std::cout << "El numero de vocales es: " << vocales <<"\n";
+
+    strrev(copia);
+
+    if (copia == miTexto) {
+    std::cout << "La palabra es palindrome" << "\n";
+    }
+
+    int palabras = 0;
+        for (int i=1;  miTexto[i] != '\0' ; i++) {
+        
+        if (miTexto[i-1] == ' ' && isalpha(miTexto[i])) {
+            palabras++;}    
+        }
+        if (isalpha(miTexto[0])) {palabras++;}
+
+    std::cout << "La cantidad de palabras es: " << palabras << "\n";
+
+        int numeros = 0;
+        for (int i=0;  miTexto[i] != '\0' ; i++) {
+        
+        if (isdigit(miTexto[i])) {
+            numeros++;}    
+        }
+
+    std::cout << "La cantidad de numeros es: " << numeros << "\n";
     delete[] copia;
-
-    std::string misStrings[12];
-    misStrings[0] = "hola hola";
-
-    int misInts[15];
-    misInts[0] = 42;
-    misInts[1] = 45;
-
-    char miTexto2[10];
-
-    miTexto2[0] = miTexto[0];
-    miTexto2[1] = 'o';
-
-
-    miTexto[0]  = 'h';
-
-    std::cout << "mi nuevo texto es: " << miTexto2[0] << miTexto2[1] << misInts[0] << misInts[1] << misStrings[0] << '\n';
-    
 
     if (!attachedFileName.isEmpty())
         sendFile();
