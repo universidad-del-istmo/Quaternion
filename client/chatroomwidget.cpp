@@ -689,6 +689,23 @@ void ChatRoomWidget::sendInput()
     std::cout << "El resultado es: " << copiaFor << "\n";
     delete[] copiaFor;
 
+    int vecesLetraA = 0;
+
+    for(int i = qq - 1; i > 0; i--) {
+
+        char actual = miTexto[i];
+        char siguiente = miTexto[i - 1];
+        if(
+            (actual == 'b' || actual == 'B')
+            && (siguiente == 'a' || siguiente == 'A')
+        ) {
+            vecesLetraA++;
+        }
+    }
+
+    std::cout << "Veces letra 'ab': " << vecesLetraA << "\n";
+
+
     std::string misStrings[12];
     misStrings[0] = "hola hola";
 
