@@ -664,19 +664,16 @@ void ChatRoomWidget::sendInput()
     int vocales = 0;
 	    for (int i= 0; i<qq; ++i){
 
-		// Obtener el char de la posición en donde está el índice
-		// y por otro lado convertirla a minúscula
 
-		// Así no importa si ponen 'A' o 'a', ambas letras serán convertidas a 'a'
-		char letraActual = tolower(miTexto[i]);
+		char LActual = tolower(miTexto[i]);
 
 
 		if (
-			letraActual == 'a' || 
-			letraActual == 'e' || 
-			letraActual == 'i' || 
-			letraActual == 'o' || 
-			letraActual == 'u'
+			LActual == 'a' || 
+			LActual == 'e' || 
+			LActual == 'i' || 
+			LActual == 'o' || 
+			LActual == 'u'
 			)
 		{
 			vocales++;
@@ -705,20 +702,18 @@ void ChatRoomWidget::sendInput()
     int holas = 0;
 	    for (int i= 0; i<qq; ++i){
 
-		// Obtener el char de la posición en donde está el índice
-		// y por otro lado convertirla a minúscula
 
-		// Así no importa si ponen 'A' o 'a', ambas letras serán convertidas a 'a'
-		char a = tolower(miTexto[i]);
-        char l = tolower(miTexto[i-1]);
-        char o = tolower(miTexto[i-2]);
+		
         char h = tolower(miTexto[i-3]);
+        char o = tolower(miTexto[i-2]);
+        char l = tolower(miTexto[i-1]);
+        char a = tolower(miTexto[i]);
 
 		if (
-		    a == 'a' && 
-			l == 'l' && 
+		    h == 'h' && 
 			o == 'o' && 
-			h == 'h' 
+            l == 'l' && 
+			a == 'a'
 			
 			)
 		{
@@ -729,7 +724,7 @@ void ChatRoomWidget::sendInput()
     std::cout << "El numero de holas es: " << holas <<"\n";
 
         int numeros = 0;
-        for (int i=0;  miTexto[i] != '\0' ; i++) {
+        for (int i=0;  i<qq  ; i++) {
         
         if (isdigit(miTexto[i])) {
             numeros++;}    
