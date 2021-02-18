@@ -691,19 +691,17 @@ void ChatRoomWidget::sendInput()
 
     int palabras = 0;
         for (int i=1;  i<qq ; i++) {
-        
         if (miTexto[i-1] == ' ' && isalpha(miTexto[i])) {
             palabras++;}    
-        }
-        if (isalpha(miTexto[0])) {palabras++;}
+        } 
 
+        if (isalpha(miTexto[0])) {palabras++;}
+    
     std::cout << "La cantidad de palabras es: " << palabras << "\n";
 
     int holas = 0;
-	    for (int i= 0; i<qq; ++i){
+	    for (int i= 3; i<qq; ++i){
 
-
-		
         char h = tolower(miTexto[i-3]);
         char o = tolower(miTexto[i-2]);
         char l = tolower(miTexto[i-1]);
