@@ -18,7 +18,7 @@
  **************************************************************************/
 
 #include "chatroomwidget.h"
-
+#include <iostream>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QToolButton>
@@ -648,6 +648,89 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
 
 void ChatRoomWidget::sendInput()
 {
+
+
+    std::string miTexto = m_chatEdit->toPlainText().toStdString();
+
+    size_t qq = miTexto.size();
+    char* copia = new char[qq];
+    copia[qq] = '\0';
+
+    for (int i = 0; i < qq; i++) {
+        copia[i] = miTexto[i];
+    }
+
+
+    int vocales = 0;
+	    for (int i= 0; i<qq; ++i){
+
+
+		char LActual = tolower(miTexto[i]);
+
+
+		if (
+			LActual == 'a' || 
+			LActual == 'e' || 
+			LActual == 'i' || 
+			LActual == 'o' || 
+			LActual == 'u'
+			)
+		{
+			vocales++;
+		}
+        }
+
+    std::cout << "El numero de vocales es: " << vocales <<"\n";
+
+    strrev(copia);
+
+    if (copia == miTexto) {
+    std::cout << "La palabra es palindrome" << "\n";
+    }
+    delete[] copia;
+
+    int palabras = 0;
+        for (int i=1;  i<qq ; i++) {
+        if (miTexto[i-1] == ' ' && isalpha(miTexto[i])) {
+            palabras++;}    
+        } 
+
+        if (isalpha(miTexto[0])) {palabras++;}
+    
+    std::cout << "La cantidad de palabras es: " << palabras << "\n";
+
+    int holas = 0;
+	    for (int i= 3; i<qq; ++i){
+
+        char h = tolower(miTexto[i-3]);
+        char o = tolower(miTexto[i-2]);
+        char l = tolower(miTexto[i-1]);
+        char a = tolower(miTexto[i]);
+
+		if (
+		    h == 'h' && 
+			o == 'o' && 
+            l == 'l' && 
+			a == 'a'
+			
+			)
+		{
+			holas++;
+		}
+        }
+
+    std::cout << "El numero de holas es: " << holas <<"\n";
+
+        int numeros = 0;
+        for (int i=0;  i<qq  ; i++) {
+        
+        if (isdigit(miTexto[i])) {
+            numeros++;}    
+        }
+
+    std::cout << "La cantidad de numeros es: " << numeros << "\n";
+    
+
     if (!attachedFileName.isEmpty())
         sendFile();
     else {
