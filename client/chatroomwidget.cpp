@@ -18,7 +18,13 @@
  **************************************************************************/
 
 #include "chatroomwidget.h"
-
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm> 
+#include <sstream> 
+#include <iterator> 
+#include <array>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QToolButton>
@@ -646,8 +652,49 @@ QString ChatRoomWidget::sendCommand(const QStringRef& command,
     return tr("Unknown /command. Use // to send this line literally");
 }
 
+
+//-------------Laboratorio #5------------ //
+
 void ChatRoomWidget::sendInput()
 {
+
+    std::cout << "-------------Laboratorio #5------------" << "\n";
+    std::string miTexto = m_chatEdit->toPlainText().toStdString();
+
+    arreglo.append(miTexto);
+    arreglo.append(" ");
+    _mensajes_enviados++;
+/*   
+    std::cout << "mensajes enviados: " << _mensajes_enviados << "\n"; 
+    std::cout << "El string es: " << arreglo << std::endl;*/
+
+    size_t tt = arreglo.size();
+    int palabras = 0;
+        for (int i=1;  i<tt ; i++) {
+        if (arreglo[i-1] == ' ' && isalpha(arreglo[i])) {
+            palabras++;}    
+        } 
+
+        if (isalpha(arreglo[0])) {palabras++;}
+
+    std::cout << "La cantidad de palabras es: " << palabras << "\n"; 
+
+    if (_mensajes_enviados  <= 10) {
+    arr.push_back(miTexto);
+    }
+
+        else {
+        arr.erase(arr.begin());
+        arr.push_back(miTexto);
+         }
+
+    int numeromensajes = 1;
+    for (std::string str: arr) {
+        std::cout << "Mensaje #" << numeromensajes << ": " <<str << "\n";
+        numeromensajes++;
+    }
+
+
     if (!attachedFileName.isEmpty())
         sendFile();
     else {

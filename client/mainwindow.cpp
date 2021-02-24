@@ -18,7 +18,8 @@
  **************************************************************************/
 
 #include "mainwindow.h"
-
+#include <iostream>
+#include <vector>
 #include "roomlistdock.h"
 #include "userlistdock.h"
 #include "chatroomwidget.h"
@@ -75,7 +76,8 @@ using Quotient::AccountSettings;
 using Quotient::Uri;
 
 MainWindow::MainWindow()
-{
+{   
+
     Connection::setRoomType<QuaternionRoom>();
 
     // Bind callbacks to signals from NetworkAccessManager
