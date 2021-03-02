@@ -85,6 +85,51 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
 
     std::cout << "boton presionado: " << key << "\n";
 
+    if(mod != Qt::ControlModifier) {
+        QWidget::keyPressEvent(event);
+        return;
+    }
+
+    int size[] = { 100, 200, 300, 400, 500 };
+    int i = key - 49;
+
+    if(key >= 0 && <= 9) {
+        int nuevo = size[i];
+        resize(nuevo, nuevo);
+        return;
+    }
+
+    int nuevo = 0;
+    for(int i = 48; i < 57; i++) {
+        nuevo += 100;
+    }
+
+    resize(nuevo, nuevo);
+
+    int nuevo = 0;
+    switch(key) {
+        case 49:
+            nuevo = 100;
+            break;
+        case 50:
+            nuevo = 200;
+            break;
+        case 51:
+            nuevo = 300;
+            break;
+        default:
+            QWidget::keyPressEvent(event);
+            return;
+    }
+
+    resize(nuevo, nuevo);
+
+    int nuevo = 100*(key - 48);
+    if(nuevo >= 100 && nuevo <= 900) {
+        resize(nuevo, nuevo);
+    }
+
+
     /*
     Modificar de tal form que:
     - ctl + 1 -> 100x100
