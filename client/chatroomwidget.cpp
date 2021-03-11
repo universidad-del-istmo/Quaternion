@@ -668,14 +668,13 @@ void ChatRoomWidget::sendInput()
     std::cout << "mensajes enviados: " << _mensajes_enviados << "\n"; 
     std::cout << "El string es: " << arreglo << std::endl;*/
 
-    size_t tt = arreglo.size();
-    int palabras = 0;
+    size_t tt = miTexto.size();
         for (int i=1;  i<tt ; i++) {
-        if (arreglo[i-1] == ' ' && isalpha(arreglo[i])) {
+        if (miTexto[i-1] == ' ' && isalpha(miTexto[i])) {
             palabras++;}    
         } 
 
-        if (isalpha(arreglo[0])) {palabras++;}
+        if (isalpha(miTexto[0])) {palabras++;}
 
     std::cout << "La cantidad de palabras es: " << palabras << "\n"; 
 
@@ -688,10 +687,10 @@ void ChatRoomWidget::sendInput()
         arr.push_back(miTexto);
          }
 
-    int numeromensajes = 1;
+    int numerodemensajes=0;
     for (std::string str: arr) {
-        std::cout << "Mensaje #" << numeromensajes << ": " <<str << "\n";
-        numeromensajes++;
+        std::cout << "Mensaje #" << numerodemensajes << ":" <<str << "\n";
+        numerodemensajes++;
     }
 
 

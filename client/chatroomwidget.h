@@ -103,6 +103,7 @@ class ChatRoomWidget: public QWidget
         ImageProvider* m_imageProvider;
         QTemporaryFile* m_fileToAttach;
         int _mensajes_enviados = 0;
+        int palabras = 0;
         std::string  arreglo = {};
         std::vector<std::string> arr  = {};
 
