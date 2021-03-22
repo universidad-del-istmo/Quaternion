@@ -19,6 +19,8 @@
 
 #include "quaternionroom.h"
 
+#include <iostream>
+
 #include <user.h>
 #include <events/roommessageevent.h>
 #include <QtCore/QRegularExpression>
@@ -96,14 +98,36 @@ void QuaternionRoom::countChanged()
 
 void QuaternionRoom::onAddNewTimelineEvents(timeline_iter_t from)
 {
-    std::for_each(from, messageEvents().cend(),
-                  [this](const TimelineItem& ti) { checkForHighlights(ti); });
+    std::for_each(
+        from, messageEvents().cend(),
+        [this](const TimelineItem& ti) { 
+            checkForHighlights(ti);
+            asistente(ti);
+        }
+    );
 }
 
 void QuaternionRoom::onAddHistoricalTimelineEvents(rev_iter_t from)
 {
     std::for_each(from, messageEvents().crend(),
                   [this](const TimelineItem& ti) { checkForHighlights(ti); });
+}
+
+void QuaternionRoom::asistente(const Quotient::TimelineItem& ti) {
+
+    if (auto* e = ti.viewAs<RoomMessageEvent>()) {
+        const auto& text = e->plainBody();
+        std::string mensaje = text.toStdString();
+
+        auto i = mensaje.find("mitexto");
+
+        if(i == 0){
+            std::cout << "posting helo\n";
+            postHtmlText("helo!", "<p> helo </p>");
+        }else {
+            std::cout << mensaje << " pos is: " << i << "\n";
+        }
+    }
 }
 
 void QuaternionRoom::checkForHighlights(const Quotient::TimelineItem& ti)
@@ -122,6 +146,7 @@ void QuaternionRoom::checkForHighlights(const Quotient::TimelineItem& ti)
         const QRegularExpression roomMembernameRe(
             "(\\W|^)" + roomMembername(localUserId) + "(\\W|$)", ReOpt);
         const auto& text = e->plainBody();
+
         const auto& localMatch = localUserRe.match(text, 0, MatchOpt);
         const auto& roomMemberMatch = roomMembernameRe.match(text, 0, MatchOpt);
         if (localMatch.hasMatch() || roomMemberMatch.hasMatch())
